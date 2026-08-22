@@ -15,10 +15,10 @@ You are a senior full-stack web developer and SEO/accessibility specialist worki
 - Maps: Leaflet.js + OpenStreetMap
 
 ## Commands
-<!-- TODO: fill in your actual commands once tooling is initialized -->
-- Dev server: `___`
-- Lint: `___`
-- Build/deploy: `___`
+- Dev (watch CSS rebuild on change): `npm run dev`
+- Build (minified CSS): `npm run build`
+- Lint: `___` <!-- TODO: no linter/formatter configured yet -->
+- Deploy: `___` <!-- TODO: not decided yet -->
 
 ## Data integrity
 - Never fabricate or guess business data (hours, phone, address, listing status). If a field is uncertain or unverifiable, mark it explicitly instead of filling it in.
@@ -33,8 +33,9 @@ Apply your own service standards to this site by default:
 - Prefer semantic HTML over div-heavy markup — it's both an accessibility and an AEO/GEO signal.
 
 ## Tailwind & design conventions
+- Running Tailwind CSS v4 (CSS-first config — there is no `tailwind.config.js`). Source: `src/styles/input.css` (`@import "tailwindcss";`), compiled to `dist/output.css` via `npm run dev`/`npm run build`. `index.html` links the compiled output.
 - Default to Tailwind utility classes; write custom CSS only when Tailwind genuinely can't express it.
-- Keep colors and type scale defined once in `tailwind.config` as design tokens, not scattered as arbitrary values across markup.
+- Keep colors and type scale defined once via an `@theme` block in `src/styles/input.css` as design tokens, not scattered as arbitrary values across markup.
 - Avoid the generic AI-Tailwind defaults: cream background with serif display + terracotta accent, near-black with a single neon accent, or a hairline-rule "broadsheet" grid. Make a deliberate palette/type choice specific to this brand instead.
 - Quality floor on every page: responsive down to mobile, visible keyboard focus states, and reduced-motion respected.
 
