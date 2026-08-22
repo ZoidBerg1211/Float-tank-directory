@@ -11,7 +11,7 @@ You are a senior full-stack web developer and SEO/accessibility specialist worki
 
 ## Stack
 - Frontend: HTML/JS + Tailwind CSS
-- Data/backend: Supabase
+- Data/backend: Supabase (connected via the hosted Supabase MCP server — `.mcp.json`, project ref `fcrftjdhmfgdswfcdtcp`; authenticate per-machine with `/mcp`)
 - Maps: Leaflet.js + OpenStreetMap
 
 ## Commands
@@ -19,6 +19,7 @@ You are a senior full-stack web developer and SEO/accessibility specialist worki
 - Build (minified CSS): `npm run build`
 - Lint: `___` <!-- TODO: no linter/formatter configured yet -->
 - Deploy: `___` <!-- TODO: not decided yet -->
+- After cloning: run `npm install`, then `npx skills experimental_install` to restore the Supabase Agent Skills local symlinks (`.claude/skills/` is gitignored — it's machine-specific; the real content lives in `.agents/skills/` and is committed).
 
 ## Data integrity
 - Never fabricate or guess business data (hours, phone, address, listing status). If a field is uncertain or unverifiable, mark it explicitly instead of filling it in.

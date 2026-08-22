@@ -45,3 +45,10 @@ ehthumbs.db
 # .claude/settings.json IS committed (shared team config, e.g. the secret-file
 # read-deny rule); settings.local.json is per-machine and never committed.
 .claude/settings.local.json
+
+# Agent Skills symlinks: these point at an absolute, machine-specific path and
+# this repo has core.symlinks=false, so committing them would give teammates a
+# broken text file instead of a working symlink. The real content lives in
+# .agents/skills/ (committed, portable); regenerate this local symlink layer
+# after cloning with `npx skills experimental_install`.
+.claude/skills/
