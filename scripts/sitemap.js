@@ -9,9 +9,13 @@ function escapeXml(str) {
     .replace(/'/g, "&apos;");
 }
 
-function renderSitemap(listings, siteUrl) {
+function renderSitemap(listings, siteUrl, extraPaths = []) {
   const base = siteUrl.replace(/\/$/, "");
-  const urls = [`${base}/`, ...listings.map((l) => `${base}/listings/${l.slug}/`)];
+  const urls = [
+    `${base}/`,
+    ...extraPaths.map((p) => `${base}${p}`),
+    ...listings.map((l) => `${base}/listings/${l.slug}/`),
+  ];
   const body = urls.map((u) => `  <url><loc>${escapeXml(u)}</loc></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }

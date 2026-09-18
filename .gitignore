@@ -26,6 +26,7 @@ out/
 # but are now build output driven by real listing data)
 listings/
 /index.html
+/float/
 /sitemap.xml
 /robots.txt
 

@@ -6,6 +6,7 @@
    actually live. */
 @source "../../scripts/listing-template.js";
 @source "../../scripts/homepage-template.js";
+@source "../../scripts/float-template.js";
 
 @theme {
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;

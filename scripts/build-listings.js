@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { renderListingPage } = require("./listing-template");
 const { renderHomepage } = require("./homepage-template");
+const { renderFloatPage } = require("./float-template");
 const { renderSitemap, renderRobotsTxt } = require("./sitemap");
 
 try {
@@ -89,7 +90,15 @@ async function main() {
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), html, "utf8");
     generated.push({ slug, file: path.join(dir, "index.html") });
-    homepageListings.push({ slug, business_name: row.business_name, city: row.city, state: row.state });
+    homepageListings.push({
+      slug,
+      business_name: row.business_name,
+      city: row.city,
+      state: row.state,
+      zip_code: row.zip_code,
+      latitude: row.latitude,
+      longitude: row.longitude,
+    });
   }
 
   console.log(`Wrote ${generated.length} listing pages to ${OUT_DIR}`);
@@ -105,9 +114,23 @@ async function main() {
     renderHomepage(homepageListings, { siteUrl: SITE_URL }),
     "utf8"
   );
-  fs.writeFileSync(path.join(ROOT_DIR, "sitemap.xml"), renderSitemap(homepageListings, SITE_URL), "utf8");
+
+  const floatDir = path.join(ROOT_DIR, "float");
+  fs.mkdirSync(floatDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(floatDir, "index.html"),
+    renderFloatPage(homepageListings, { siteUrl: SITE_URL }),
+    "utf8"
+  );
+
+  const extraPaths = ["/about/", "/float/"];
+  fs.writeFileSync(
+    path.join(ROOT_DIR, "sitemap.xml"),
+    renderSitemap(homepageListings, SITE_URL, extraPaths),
+    "utf8"
+  );
   fs.writeFileSync(path.join(ROOT_DIR, "robots.txt"), renderRobotsTxt(SITE_URL), "utf8");
-  console.log("Wrote index.html, sitemap.xml, robots.txt");
+  console.log("Wrote index.html, float/index.html, sitemap.xml, robots.txt");
 
   // --- Verification: catch bugs across all pages, not just a hand-picked sample. ---
   let failures = 0;

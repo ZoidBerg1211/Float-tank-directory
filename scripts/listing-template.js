@@ -160,6 +160,11 @@ function renderListingPage(row, { siteUrl, canonicalPath }) {
         class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
         >About</a
       >
+      <a
+        href="../../float/"
+        class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+        >Find a Float</a
+      >
     </div>
   </header>
 
