@@ -21,6 +21,10 @@ build/
 .next/
 out/
 
+# Generated listing pages (regenerated from Supabase by
+# scripts/build-listings.js — never hand-edit these)
+listings/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

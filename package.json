@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate:listings": "node scripts/build-listings.js",
     "dev": "tailwindcss -i ./src/styles/input.css -o ./dist/output.css --watch",
-    "build": "tailwindcss -i ./src/styles/input.css -o ./dist/output.css --minify",
+    "build": "npm run generate:listings && tailwindcss -i ./src/styles/input.css -o ./dist/output.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,8 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "aos": "^2.3.4"
   }
 }

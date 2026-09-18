@@ -10,5 +10,20 @@
       "Read(*.key)",
       "Read(**/*.key)"
     ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$status = git status --porcelain; if ($status) { git add -A; $ts = Get-Date -Format 'yyyy-MM-dd HH:mm'; git commit -m \"Auto-checkpoint: $ts\" -m \"Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>\" | Out-Null }",
+            "timeout": 30,
+            "statusMessage": "Auto-committing local changes (not pushed)..."
+          }
+        ]
+      }
+    ]
   }
 }

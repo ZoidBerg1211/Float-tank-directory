@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+/* Listing pages are generated from this template, not scanned from static
+   HTML in the repo (dist/ and listings/ are gitignored build output) — tell
+   Tailwind's v4 auto content-detection where the class names actually live. */
+@source "../../scripts/listing-template.js";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* White + cool blue, per brand direction (2026-09-18) — avoid generic
+     Tailwind blue-500/600 defaults. */
+  --color-canvas: #ffffff;
+  --color-surface: #f4f8fc;
+  --color-surface-alt: #eaf1fa;
+  --color-border: #dce6f0;
+  --color-ink: #0b1f33;
+  --color-ink-muted: #52708a;
+  --color-primary: #0077c2;
+  --color-primary-dark: #005a94;
+  --color-accent-tint: #e3f2fc;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  a {
+    color: var(--color-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

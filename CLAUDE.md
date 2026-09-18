@@ -52,7 +52,8 @@ Apply your own service standards to this site by default:
 
 ## Autonomy boundaries
 - Free rein: UI/CSS, content/copy, non-destructive refactors, adding listings.
-- Ask first: schema or migration changes, bulk deletes, anything touching production data, committing or pushing.
+- Ask first: schema or migration changes, bulk deletes, anything touching production data, pushing to the remote.
+- Local commits are automatic: a Stop hook (`.claude/settings.json`) commits uncommitted changes at the end of each session with a generic "Auto-checkpoint" message. It never pushes — pushing to `origin` still requires explicit confirmation each time. (Changed 2026-09-18 at the user's request; this hook is what makes it safe to skip the old "ask before committing" rule.)
 
 ## When you make a mistake
 1. Fix it.
