@@ -37,7 +37,7 @@ function renderHomepage(listings, { siteUrl }) {
   <title>Float Tank Directory \u2013 Find Float Tanks Near You</title>
   <meta
     name="description"
-    content="Search ${count} verified float tank studios by city, state, or name. Compare real pricing, amenities, and cleaning standards before you book."
+    content="Search verified float tank studios by city, state, or name. Compare real pricing, amenities, and cleaning standards before you book."
   />
   <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
   <link rel="stylesheet" href="./dist/output.css" />
@@ -60,7 +60,7 @@ function renderHomepage(listings, { siteUrl }) {
     <section class="text-center sm:text-left">
       <h1 class="font-display text-3xl font-semibold text-ink sm:text-4xl">Find a Float Tank Near You</h1>
       <p class="mt-3 text-ink-muted">
-        Search ${count} verified studios by city, state, or name — compare real pricing, amenities, and
+        Search verified studios by city, state, or name — compare real pricing, amenities, and
         cleaning standards before you book.
       </p>
       <div class="mt-6">
