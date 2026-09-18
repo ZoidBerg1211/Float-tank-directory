@@ -3,6 +3,8 @@
 const fs = require("fs");
 const path = require("path");
 const { renderListingPage } = require("./listing-template");
+const { renderHomepage } = require("./homepage-template");
+const { renderSitemap, renderRobotsTxt } = require("./sitemap");
 
 try {
   process.loadEnvFile();
@@ -24,6 +26,7 @@ if (!SITE_URL) {
 }
 
 const OUT_DIR = path.join(__dirname, "..", "listings");
+const ROOT_DIR = path.join(__dirname, "..");
 
 function slugify(str) {
   return String(str)
@@ -75,6 +78,7 @@ async function main() {
 
   const usedSlugs = new Set();
   const generated = [];
+  const homepageListings = [];
 
   for (const row of rows) {
     const slug = makeUniqueSlug(row, usedSlugs);
@@ -85,9 +89,25 @@ async function main() {
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), html, "utf8");
     generated.push({ slug, file: path.join(dir, "index.html") });
+    homepageListings.push({ slug, business_name: row.business_name, city: row.city, state: row.state });
   }
 
   console.log(`Wrote ${generated.length} listing pages to ${OUT_DIR}`);
+
+  homepageListings.sort((a, b) => {
+    return (
+      a.state.localeCompare(b.state) || a.city.localeCompare(b.city) || a.business_name.localeCompare(b.business_name)
+    );
+  });
+
+  fs.writeFileSync(
+    path.join(ROOT_DIR, "index.html"),
+    renderHomepage(homepageListings, { siteUrl: SITE_URL }),
+    "utf8"
+  );
+  fs.writeFileSync(path.join(ROOT_DIR, "sitemap.xml"), renderSitemap(homepageListings, SITE_URL), "utf8");
+  fs.writeFileSync(path.join(ROOT_DIR, "robots.txt"), renderRobotsTxt(SITE_URL), "utf8");
+  console.log("Wrote index.html, sitemap.xml, robots.txt");
 
   // --- Verification: catch bugs across all pages, not just a hand-picked sample. ---
   let failures = 0;

@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
-/* Listing pages are generated from this template, not scanned from static
-   HTML in the repo (dist/ and listings/ are gitignored build output) — tell
-   Tailwind's v4 auto content-detection where the class names actually live. */
+/* Pages are generated from these templates, not scanned from static HTML in
+   the repo (dist/, listings/, index.html, sitemap.xml are gitignored build
+   output) — tell Tailwind's v4 auto content-detection where the class names
+   actually live. */
 @source "../../scripts/listing-template.js";
+@source "../../scripts/homepage-template.js";
 
 @theme {
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;

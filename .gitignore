@@ -21,9 +21,13 @@ build/
 .next/
 out/
 
-# Generated listing pages (regenerated from Supabase by
-# scripts/build-listings.js — never hand-edit these)
+# Generated pages (regenerated from Supabase by scripts/build-listings.js —
+# never hand-edit these; index.html/sitemap.xml/robots.txt used to be static
+# but are now build output driven by real listing data)
 listings/
+/index.html
+/sitemap.xml
+/robots.txt
 
 # Logs
 npm-debug.log*
