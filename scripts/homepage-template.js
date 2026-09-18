@@ -51,8 +51,13 @@ function renderHomepage(listings, { siteUrl }) {
 </head>
 <body class="bg-canvas text-ink font-sans antialiased">
   <header class="border-b border-border">
-    <div class="mx-auto max-w-3xl px-4 py-4">
+    <div class="mx-auto flex max-w-3xl items-center gap-6 px-4 py-4">
       <span class="font-display text-lg font-semibold text-primary">Float Tank Directory</span>
+      <a
+        href="about/"
+        class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+        >About</a
+      >
     </div>
   </header>
 
