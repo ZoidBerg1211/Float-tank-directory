@@ -82,6 +82,11 @@ function renderFloatPage(listings, { siteUrl }) {
       />
     </div>
 
+    <section class="mt-6" aria-labelledby="map-heading">
+      <h2 id="map-heading" class="sr-only">Map</h2>
+      <div id="map" class="h-80 w-full rounded-lg border border-border sm:h-96"></div>
+    </section>
+
     <section class="mt-6" aria-labelledby="results-heading">
       <h2 id="results-heading" class="sr-only">Results</h2>
       <div id="results" role="list">
@@ -89,11 +94,6 @@ function renderFloatPage(listings, { siteUrl }) {
           Search by city, state, or zip to see float studios near you.
         </p>
       </div>
-    </section>
-
-    <section class="mt-6" aria-labelledby="map-heading">
-      <h2 id="map-heading" class="sr-only">Map</h2>
-      <div id="map" class="h-80 w-full rounded-lg border border-border sm:h-96"></div>
     </section>
   </main>
 
