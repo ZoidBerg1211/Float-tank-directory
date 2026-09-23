@@ -188,6 +188,19 @@ function renderListingPage(row, { siteUrl, canonicalPath }) {
             : ""
         }
       </div>
+      ${
+        !isAbsent(row.website_url)
+          ? `<div class="mt-3">
+        <a
+          href="${escapeHtml(row.website_url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary underline decoration-border underline-offset-2 hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"
+          >Visit website<span class="sr-only"> (opens in a new tab)</span></a
+        >
+      </div>`
+          : ""
+      }
     </header>
 
     ${
