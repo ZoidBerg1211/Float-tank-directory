@@ -53,19 +53,26 @@ function renderFloatPage(listings, { siteUrl }) {
 </head>
 <body class="bg-canvas text-ink font-sans antialiased">
   <header class="border-b border-border">
-    <div class="mx-auto flex max-w-3xl items-center gap-6 px-4 py-4">
-      <a href="../" class="font-display text-lg font-semibold text-primary">Float Tank Directory</a>
-      <a
-        href="../about/"
-        class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-        >About</a
-      >
-      <a
-        href="./"
-        class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-        aria-current="page"
-        >Find a Float</a
-      >
+    <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-4">
+      <a href="../" class="font-display text-base font-semibold text-primary sm:text-lg">Float Tank Directory</a>
+      <nav class="flex items-center gap-2 sm:gap-6" aria-label="Primary">
+        <a
+          href="../"
+          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+          >Home</a
+        >
+        <a
+          href="../about/"
+          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+          >About</a
+        >
+        <a
+          href="./"
+          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+          aria-current="page"
+          >Find a Float</a
+        >
+      </nav>
     </div>
   </header>
 
