@@ -23,6 +23,10 @@
   --color-primary: #0077c2;
   --color-primary-dark: #005a94;
   --color-accent-tint: #e3f2fc;
+
+  /* Squircle card corners (2026-09-22) — plain border-radius, not clip-path/mask:
+     those clip box-shadow and the focus ring, which breaks visible-focus a11y. */
+  --radius-squircle: 1.75rem;
 }
 
 @layer base {
