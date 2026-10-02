@@ -1,6 +1,13 @@
 "use strict";
 
 const { escapeHtml } = require("./listing-template");
+const { siteHeader, siteFooter, CONTAINER } = require("./site-chrome");
+
+// One class string for the server-rendered and the JS-rendered cards so the
+// two can't drift. The lift is cancelled under reduced motion (the global
+// rule only shortens the transition; it would still jump).
+const CARD_CLASS =
+  "group block h-full min-h-20 rounded-squircle border border-border bg-surface p-5 transition-[translate,box-shadow,border-color,background-color] duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-accent-tint hover:shadow-lift focus-visible:-translate-y-0.5 focus-visible:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0";
 
 const FEATURED_COUNT = 10;
 
@@ -12,9 +19,9 @@ function cardHtml(l) {
   return `<li>
           <a
             href="listings/${escapeHtml(l.slug)}/"
-            class="group block h-full min-h-20 rounded-squircle border border-border bg-surface p-5 transition-colors hover:border-primary hover:bg-accent-tint focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            class="${CARD_CLASS}"
           >
-            <span class="block font-display font-semibold text-ink group-hover:text-primary">${escapeHtml(
+            <span class="block font-display font-semibold text-ink group-hover:text-primary-dark">${escapeHtml(
               l.business_name
             )}</span>
             <span class="mt-1 block text-sm text-ink-muted">${escapeHtml(l.city)}, ${escapeHtml(l.state)}</span>
@@ -75,31 +82,15 @@ function renderHomepage(listings, { siteUrl }) {
   <script type="application/ld+json">${escapeJsonForScriptTag(jsonLd)}</script>
 </head>
 <body class="bg-canvas text-ink font-sans antialiased">
-  <header class="border-b border-border">
-    <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-4">
-      <span class="font-display text-base font-semibold text-primary sm:text-lg">Float Tank Directory</span>
-      <nav class="flex items-center gap-2 sm:gap-6" aria-label="Primary">
-        <a
-          href="about/"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >About</a
-        >
-        <a
-          href="float/"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >Find a Float</a
-        >
-      </nav>
-    </div>
-  </header>
+  ${siteHeader({ base: "./", current: "home" })}
 
   <main>
     <section class="relative isolate overflow-hidden border-b border-border bg-surface" aria-labelledby="hero-heading">
-      <div class="relative mx-auto max-w-3xl px-4 pt-14 pb-12 sm:pt-24 sm:pb-20">
+      <div class="relative ${CONTAINER} pt-14 pb-12 sm:pt-24 sm:pb-20">
         <!-- Decorative: a drop landing on still water. Rings are CSS-animated
              (not SMIL) so the reduced-motion block in input.css can stop them. -->
         <svg
-          class="ripple pointer-events-none absolute -top-24 -right-44 -z-10 size-[26rem] sm:top-1/2 sm:-right-56 sm:size-[40rem] sm:-translate-y-1/2"
+          class="ripple pointer-events-none absolute -top-24 -right-44 -z-10 size-[26rem] sm:top-1/2 sm:-right-40 sm:size-[40rem] sm:-translate-y-1/2"
           viewBox="0 0 400 400"
           aria-hidden="true"
           focusable="false"
@@ -110,10 +101,10 @@ function renderHomepage(listings, { siteUrl }) {
           <circle class="ripple-ring" cx="200" cy="200" r="196" />
           <circle class="ripple-drop" cx="200" cy="200" r="5" />
         </svg>
-        <h1 id="hero-heading" class="max-w-xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl">
+        <h1 id="hero-heading" class="max-w-xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-hero">
           Find a float tank near you
         </h1>
-        <p class="mt-5 max-w-lg text-lg text-ink-muted">
+        <p class="mt-5 max-w-lg text-lede text-ink-muted">
           Search verified studios by city, state, or name — compare real pricing, amenities, and
           cleaning standards before you book.
         </p>
@@ -136,10 +127,10 @@ function renderHomepage(listings, { siteUrl }) {
       </div>
     </section>
 
-    <div class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+    <div class="${CONTAINER} py-10 sm:py-14">
     <section aria-labelledby="listings-heading">
       <div class="flex items-center justify-between gap-4">
-        <h2 id="listings-heading" class="font-display text-lg font-semibold text-ink">Featured Studios</h2>
+        <h2 id="listings-heading" class="font-display text-section font-semibold text-ink">Featured Studios</h2>
         <button
           type="button"
           id="rotation-toggle"
@@ -149,7 +140,7 @@ function renderHomepage(listings, { siteUrl }) {
           Pause auto-refresh
         </button>
       </div>
-      <ul id="listings-grid" role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <ul id="listings-grid" role="list" class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         ${featuredHtml}
       </ul>
       <p id="no-results" class="py-6 text-center text-ink-muted" hidden>No studios match your search.</p>
@@ -157,9 +148,7 @@ function renderHomepage(listings, { siteUrl }) {
     </div>
   </main>
 
-  <footer class="mt-12 border-t border-border">
-    <div class="mx-auto max-w-3xl px-4 py-6 text-sm text-ink-muted">Float Tank Directory</div>
-  </footer>
+  ${siteFooter({ base: "./" })}
 
   <script type="application/json" id="listings-data">${escapeJsonForScriptTag(dataset)}</script>
   <script>
@@ -199,8 +188,8 @@ function renderHomepage(listings, { siteUrl }) {
         return (
           '<li><a href="listings/' +
           escapeHtml(item.slug) +
-          '/" class="group block h-full min-h-20 rounded-squircle border border-border bg-surface p-5 transition-colors hover:border-primary hover:bg-accent-tint focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2">' +
-          '<span class="block font-display font-semibold text-ink group-hover:text-primary">' +
+          '/" class="${CARD_CLASS}">' +
+          '<span class="block font-display font-semibold text-ink group-hover:text-primary-dark">' +
           escapeHtml(item.business_name) +
           '</span><span class="mt-1 block text-sm text-ink-muted">' +
           escapeHtml(item.city) +

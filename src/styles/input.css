@@ -7,6 +7,7 @@
 @source "../../scripts/listing-template.js";
 @source "../../scripts/homepage-template.js";
 @source "../../scripts/float-template.js";
+@source "../../scripts/site-chrome.js";
 
 @theme {
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -28,10 +29,39 @@
      those clip box-shadow and the focus ring, which breaks visible-focus a11y. */
   --radius-squircle: 1.75rem;
 
-  /* Hero search lift (2026-10-01): a faint ink contact shadow plus a soft
-     primary-tinted bloom, derived from the colour tokens above. */
+  /* Type scale (2026-10-01). Semantic steps, each with its own leading and
+     tracking, so pages pick a role ("page title", "lede") rather than a size.
+     Mobile sizes fall back to Tailwind's default steps (text-3xl/4xl). */
+  --text-hero: 3.75rem;
+  --text-hero--line-height: 1.04;
+  --text-hero--letter-spacing: -0.025em;
+  --text-page: 2.75rem;
+  --text-page--line-height: 1.08;
+  --text-page--letter-spacing: -0.02em;
+  --text-section: 1.375rem;
+  --text-section--line-height: 1.25;
+  --text-section--letter-spacing: -0.01em;
+  --text-lede: 1.1875rem;
+  --text-lede--line-height: 1.6;
+  --text-prose: 1.0625rem;
+  --text-prose--line-height: 1.75;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.08em;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.4;
+  /* Header wordmark on phones: sized so brand + 3 nav links fit one row at 375px. */
+  --text-brand: 0.9375rem;
+  --text-brand--line-height: 1.5;
+
+  /* Depth (2026-10-01) — spent sparingly: the hero search, the one primary
+     card on a page, and the hover/focus lift. All derived from colour tokens. */
   --shadow-search: 0 1px 2px color-mix(in oklab, var(--color-ink) 4%, transparent),
     0 8px 24px -12px color-mix(in oklab, var(--color-primary) 25%, transparent);
+  --shadow-card: 0 1px 2px color-mix(in oklab, var(--color-ink) 4%, transparent),
+    0 18px 40px -24px color-mix(in oklab, var(--color-primary) 40%, transparent);
+  --shadow-lift: 0 2px 4px color-mix(in oklab, var(--color-ink) 5%, transparent),
+    0 14px 28px -16px color-mix(in oklab, var(--color-primary) 45%, transparent);
 }
 
 @layer base {
@@ -88,6 +118,32 @@
     0% { transform: scale(0.06); opacity: 0; }
     10% { opacity: 0.5; }
     100% { transform: scale(1); opacity: 0; }
+  }
+
+  /* Find-a-Float map pins (Leaflet divIcon). Custom CSS because the element
+     is created by Leaflet, not by our markup. .is-active is the two-way
+     card <-> pin highlight. */
+  .map-pin {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    border: 2px solid var(--color-canvas);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--color-ink) 35%, transparent);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .map-pin.is-active {
+    transform: scale(1.4);
+    background: var(--color-primary-dark);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-primary) 25%, transparent);
+  }
+  .leaflet-marker-icon:focus-visible .map-pin,
+  .leaflet-marker-icon:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 9999px;
   }
 
   /* Reduced motion: no movement, but keep the rings as a still image rather

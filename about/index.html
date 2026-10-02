@@ -26,193 +26,234 @@
   </script>
 </head>
 <body class="bg-canvas text-ink font-sans antialiased">
-  <header class="border-b border-border">
-    <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-4">
-      <a href="../" class="font-display text-base font-semibold text-primary sm:text-lg">Float Tank Directory</a>
-      <nav class="flex items-center gap-2 sm:gap-6" aria-label="Primary">
-        <a
-          href="../"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >Home</a
-        >
-        <a
-          href="./"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          aria-current="page"
-          >About</a
-        >
-        <a
-          href="../float/"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >Find a Float</a
-        >
+  <!-- Header/footer are hand-copied from scripts/site-chrome.js (this page is
+       static, not generated). Keep the two in step when changing either. -->
+  <header class="sticky top-0 z-50 border-b border-border bg-canvas/85 backdrop-blur-md">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-3">
+      <a href="../" class="font-display text-brand font-semibold text-primary focus-visible:outline-2 focus-visible:outline-primary sm:text-lg">Float Tank Directory</a>
+      <nav class="flex items-center gap-2 sm:gap-5" aria-label="Primary">
+        <a href="../" class="rounded-md py-2 text-sm font-medium text-ink-muted sm:px-1 transition-colors hover:text-primary aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-primary aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[10px] focus-visible:outline-2 focus-visible:outline-primary">Home</a>
+        <a href="../about/" class="rounded-md py-2 text-sm font-medium text-ink-muted sm:px-1 transition-colors hover:text-primary aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-primary aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[10px] focus-visible:outline-2 focus-visible:outline-primary" aria-current="page">About</a>
+        <a href="../float/" class="rounded-md py-2 text-sm font-medium text-ink-muted sm:px-1 transition-colors hover:text-primary aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-primary aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[10px] focus-visible:outline-2 focus-visible:outline-primary">Find a Float</a>
       </nav>
     </div>
   </header>
 
-  <main class="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-    <h1 class="font-display text-3xl font-semibold text-ink sm:text-4xl">What Is Floating?</h1>
+  <main class="mx-auto w-full max-w-6xl px-4 sm:px-6 py-10 sm:py-16">
+    <article class="text-prose text-ink">
+      <header class="max-w-[65ch]">
+        <p class="text-eyebrow font-medium uppercase text-primary">About floating</p>
+        <h1 class="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-page">What Is Floating?</h1>
+      </header>
 
-    <section class="mt-8" aria-labelledby="what-heading">
-      <h2 id="what-heading" class="font-display text-xl font-semibold text-ink">The Basics</h2>
-      <p class="mt-3 text-ink-muted">
-        Floating means lying in a shallow pool of water saturated with Epsom salt (magnesium sulfate) —
-        dense enough that your body rests on the surface without any effort to stay afloat. Tanks are
-        kept dark, soundproofed, and set to skin temperature to cut down on outside sensory input.
-      </p>
-      <p class="mt-3 text-ink-muted">
-        You'll see the same thing called several different names: isolation tank, sensory deprivation
-        tank, flotation tank, float pod, float cabin, or sensory attenuation tank. In research
-        literature it's usually called <strong>REST</strong> &mdash; Restricted (sometimes "Reduced")
-        Environmental Stimulation Therapy.
-      </p>
-    </section>
+      <section class="mt-10 max-w-[65ch]" aria-labelledby="what-heading">
+        <h2 id="what-heading" class="font-display text-section font-semibold">The Basics</h2>
+        <p class="mt-4 text-lede">
+          Floating means lying in a shallow pool of water saturated with Epsom salt (magnesium sulfate) —
+          dense enough that your body rests on the surface without any effort to stay afloat. Tanks are
+          kept dark, soundproofed, and set to skin temperature to cut down on outside sensory input.
+        </p>
+        <p class="mt-4">
+          You'll see the same thing called several different names: isolation tank, sensory deprivation
+          tank, flotation tank, float pod, float cabin, or sensory attenuation tank. In research
+          literature it's usually called <strong>REST</strong> &mdash; Restricted (sometimes "Reduced")
+          Environmental Stimulation Therapy.
+        </p>
+      </section>
 
-    <section class="mt-8" aria-labelledby="history-heading">
-      <h2 id="history-heading" class="font-display text-xl font-semibold text-ink">A Short History</h2>
-      <p class="mt-3 text-ink-muted">
-        Floating traces back to 1954, when neuropsychiatrist John C. Lilly built the first isolation
-        tank while at the U.S. National Institute of Mental Health. Lilly was testing a real open
-        question in brain science at the time: whether the brain would go quiet without outside
-        stimulation, or stay active on its own. His original tank submerged users almost entirely,
-        breathing through a mask.
-      </p>
-      <p class="mt-3 text-ink-muted">
-        Floating stayed mostly a research tool for close to two decades. In 1972, Glenn Perry &mdash;
-        who had attended one of Lilly's workshops &mdash; began selling the first commercial tanks,
-        closer to the open, salt-saturated design used today. The 1980 film <em>Altered States</em>,
-        loosely inspired by Lilly's work, brought floating into public awareness, though hygiene
-        concerns in the 1980s slowed the industry's growth for a time.
-      </p>
-    </section>
+      <section class="mt-12 max-w-[65ch]" aria-labelledby="history-heading">
+        <h2 id="history-heading" class="font-display text-section font-semibold">A Short History</h2>
+        <p class="mt-4">
+          Floating traces back to 1954, when neuropsychiatrist John C. Lilly built the first isolation
+          tank while at the U.S. National Institute of Mental Health. Lilly was testing a real open
+          question in brain science at the time: whether the brain would go quiet without outside
+          stimulation, or stay active on its own. His original tank submerged users almost entirely,
+          breathing through a mask.<sup class="ml-0.5"><a href="#source-1" id="cite-1" class="scroll-mt-24 font-medium text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"><span class="sr-only">Source </span>1</a></sup>
+        </p>
+        <p class="mt-4">
+          Floating stayed mostly a research tool for close to two decades. In 1972, Glenn Perry &mdash;
+          who had attended one of Lilly's workshops &mdash; began selling the first commercial tanks,
+          closer to the open, salt-saturated design used today. The 1980 film <em>Altered States</em>,
+          loosely inspired by Lilly's work, brought floating into public awareness, though hygiene
+          concerns in the 1980s slowed the industry's growth for a time.
+        </p>
+      </section>
 
-    <section class="mt-8" aria-labelledby="science-heading">
-      <h2 id="science-heading" class="font-display text-xl font-semibold text-ink">The Science</h2>
-      <p class="mt-3 text-ink-muted">
-        Modern float tanks use around 10 inches of water saturated with Epsom salt, dense enough
-        (roughly 1.25&ndash;1.26 specific gravity &mdash; denser than the Dead Sea) that anyone floats
-        face-up without effort. Water and air are kept at skin temperature, so it becomes hard to tell
-        where your body ends and the water begins. Combined with darkness and silence, the goal is to
-        reduce external input &mdash; touch, sound, sight, even the ordinary pull of gravity on your
-        muscles &mdash; and let the nervous system settle.
-      </p>
-      <p class="mt-3 text-ink-muted">
-        One common claim worth a note: some float centers describe Epsom salt as something your skin
-        absorbs for a magnesium boost. Current research doesn't support that &mdash; a 2017
-        peer-reviewed review found no good evidence of meaningful magnesium absorption through skin. In
-        a float tank, Epsom salt's actual job is simpler: it makes the water dense enough to float in.
-      </p>
-    </section>
+      <section class="mt-12 max-w-[65ch]" aria-labelledby="science-heading">
+        <h2 id="science-heading" class="font-display text-section font-semibold">The Science</h2>
+        <p class="mt-4">
+          Modern float tanks use around 10 inches of water saturated with Epsom salt, dense enough
+          (roughly 1.25&ndash;1.26 specific gravity &mdash; denser than the Dead Sea) that anyone floats
+          face-up without effort. Water and air are kept at skin temperature, so it becomes hard to tell
+          where your body ends and the water begins. Combined with darkness and silence, the goal is to
+          reduce external input &mdash; touch, sound, sight, even the ordinary pull of gravity on your
+          muscles &mdash; and let the nervous system settle.
+        </p>
+        <p class="mt-4">
+          One common claim worth a note: some float centers describe Epsom salt as something your skin
+          absorbs for a magnesium boost. Current research doesn't support that &mdash; a 2017
+          peer-reviewed review found no good evidence of meaningful magnesium absorption through skin. In
+          a float tank, Epsom salt's actual job is simpler: it makes the water dense enough to float in.
+        </p>
+      </section>
 
-    <section class="mt-8" aria-labelledby="benefits-heading">
-      <h2 id="benefits-heading" class="font-display text-xl font-semibold text-ink">
-        What the Research Actually Shows
-      </h2>
-      <p class="mt-3 text-ink-muted">
-        Floating has a real and growing body of research behind it &mdash; though the strength of the
-        evidence varies by outcome.
-      </p>
-      <ul class="mt-4 space-y-4">
-        <li>
-          <p class="font-medium text-ink">Anxiety and stress</p>
-          <p class="mt-1 text-ink-muted">
-            The best-studied effect. In a study of 50 people with anxiety and depression, a single
-            hour-long float produced a large drop in state anxiety, along with reduced stress, muscle
-            tension, and negative mood. It was a single-session study with no placebo control, so how
-            long the effect lasts, and how it compares to a relaxing hour spent another way, is still
-            being worked out.
+      <section class="mt-12" aria-labelledby="benefits-heading">
+        <div class="max-w-[65ch]">
+          <h2 id="benefits-heading" class="font-display text-section font-semibold">
+            What the Research Actually Shows
+          </h2>
+          <p class="mt-4">
+            Floating has a real and growing body of research behind it &mdash; though the strength of the
+            evidence varies by outcome.<sup class="ml-0.5"><a href="#source-4" id="cite-4" class="scroll-mt-24 font-medium text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"><span class="sr-only">Source </span>4</a></sup>
           </p>
-        </li>
-        <li>
-          <p class="font-medium text-ink">Blood pressure</p>
-          <p class="mt-1 text-ink-muted">
-            One of the more consistently reported physical effects &mdash; multiple studies have found
-            reduced systolic and diastolic blood pressure after floating, particularly in people with
-            hypertension.
-          </p>
-        </li>
-        <li>
-          <p class="font-medium text-ink">Pain, including fibromyalgia</p>
-          <p class="mt-1 text-ink-muted">
-            A multi-site study of 81 people with fibromyalgia found short-term reductions in pain,
-            muscle tension, and stress after three float sessions. Evidence here is mixed, though: at
-            least one randomized controlled trial found no significant difference between floating and
-            a placebo/waitlist control on pain outcomes.
-          </p>
-        </li>
-        <li>
-          <p class="font-medium text-ink">Exercise recovery</p>
-          <p class="mt-1 text-ink-muted">
-            Some studies report improved perceived recovery and reduced soreness after intense exercise,
-            though the studies involved are still small.
-          </p>
-        </li>
-      </ul>
-      <p class="mt-4 text-ink-muted">
-        Overall, floating is well-studied enough to say it produces real, measurable relaxation effects
-        in the short term. Claims beyond that &mdash; permanent pain relief, a cure for a specific
-        condition &mdash; go further than the current research supports.
-      </p>
-    </section>
+        </div>
 
-    <section class="mt-8 border-t border-border pt-6" aria-labelledby="sources-heading">
-      <h2 id="sources-heading" class="text-sm font-semibold text-ink-muted">Sources</h2>
-      <ul class="mt-2 space-y-1 text-sm text-ink-muted">
-        <li>
-          <a
-            href="https://en.wikipedia.org/wiki/Isolation_tank"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary hover:text-primary-dark"
-            >Isolation tank &mdash; Wikipedia</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0190292"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary hover:text-primary-dark"
-            >Feinstein et al., "Examining the short-term anxiolytic and antidepressant effect of
-            Floatation-REST" &mdash; PLOS ONE, 2018</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0286899"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary hover:text-primary-dark"
-            >"A randomized controlled safety and feasibility trial of floatation-REST in anxious and
-            depressed individuals" &mdash; PLOS ONE, 2023</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://link.springer.com/article/10.1186/s12906-025-04973-0"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary hover:text-primary-dark"
-            >"A systematic review of Flotation-Restricted Environmental Stimulation Therapy (REST)"
-            &mdash; BMC Complementary Medicine and Therapies, 2025</a
-          >
-        </li>
-      </ul>
-    </section>
+        <!-- Evidence tags are worded from each paragraph's own text — no new claims. -->
+        <ul class="mt-6 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2" role="list">
+          <li class="rounded-squircle bg-surface p-6">
+            <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+              <h3 class="font-display text-lg font-semibold">Anxiety and stress</h3>
+              <span class="rounded-md bg-primary px-2 py-1 text-eyebrow font-medium uppercase text-white">Best-studied</span>
+            </div>
+            <p class="mt-3 text-base leading-relaxed">
+              The best-studied effect. In a study of 50 people with anxiety and depression, a single
+              hour-long float produced a large drop in state anxiety, along with reduced stress, muscle
+              tension, and negative mood.<sup class="ml-0.5"><a href="#source-2" id="cite-2" class="scroll-mt-24 font-medium text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"><span class="sr-only">Source </span>2</a></sup>
+              It was a single-session study with no placebo control, so how long the effect lasts, and how
+              it compares to a relaxing hour spent another way, is still being worked out.
+            </p>
+          </li>
+          <li class="rounded-squircle bg-surface p-6">
+            <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+              <h3 class="font-display text-lg font-semibold">Blood pressure</h3>
+              <span class="rounded-md bg-accent-tint px-2 py-1 text-eyebrow font-medium uppercase text-primary-dark">Consistently reported</span>
+            </div>
+            <p class="mt-3 text-base leading-relaxed">
+              One of the more consistently reported physical effects &mdash; multiple studies have found
+              reduced systolic and diastolic blood pressure after floating, particularly in people with
+              hypertension.
+            </p>
+          </li>
+          <li class="rounded-squircle bg-surface p-6">
+            <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+              <h3 class="font-display text-lg font-semibold">Pain, including fibromyalgia</h3>
+              <span class="rounded-md border border-border bg-canvas px-2 py-1 text-eyebrow font-medium uppercase text-ink-muted">Mixed evidence</span>
+            </div>
+            <p class="mt-3 text-base leading-relaxed">
+              A multi-site study of 81 people with fibromyalgia found short-term reductions in pain,
+              muscle tension, and stress after three float sessions. Evidence here is mixed, though: at
+              least one randomized controlled trial found no significant difference between floating and
+              a placebo/waitlist control on pain outcomes.
+            </p>
+          </li>
+          <li class="rounded-squircle bg-surface p-6">
+            <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+              <h3 class="font-display text-lg font-semibold">Exercise recovery</h3>
+              <span class="rounded-md border border-border bg-canvas px-2 py-1 text-eyebrow font-medium uppercase text-ink-muted">Small studies</span>
+            </div>
+            <p class="mt-3 text-base leading-relaxed">
+              Some studies report improved perceived recovery and reduced soreness after intense exercise,
+              though the studies involved are still small.
+            </p>
+          </li>
+        </ul>
 
-    <div class="mt-12 text-center">
-      <a
-        href="../float/"
-        class="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        <p class="mt-6 max-w-[65ch]">
+          Overall, floating is well-studied enough to say it produces real, measurable relaxation effects
+          in the short term. Claims beyond that &mdash; permanent pain relief, a cure for a specific
+          condition &mdash; go further than the current research supports.
+        </p>
+      </section>
+
+      <section class="mt-14 max-w-[65ch] border-t border-border pt-8" aria-labelledby="sources-heading">
+        <h2 id="sources-heading" class="scroll-mt-24 text-eyebrow font-medium uppercase text-ink-muted">Sources</h2>
+        <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm text-ink-muted marker:font-medium marker:text-ink-muted">
+          <li id="source-1" class="scroll-mt-24 pl-1">
+            <a
+              href="https://en.wikipedia.org/wiki/Isolation_tank"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"
+              >Isolation tank &mdash; Wikipedia<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          </li>
+          <li id="source-2" class="scroll-mt-24 pl-1">
+            <a
+              href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0190292"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"
+              >Feinstein et al., "Examining the short-term anxiolytic and antidepressant effect of
+              Floatation-REST" &mdash; PLOS ONE, 2018<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          </li>
+          <li id="source-3" class="scroll-mt-24 pl-1">
+            <a
+              href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0286899"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"
+              >"A randomized controlled safety and feasibility trial of floatation-REST in anxious and
+              depressed individuals" &mdash; PLOS ONE, 2023<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          </li>
+          <li id="source-4" class="scroll-mt-24 pl-1">
+            <a
+              href="https://link.springer.com/article/10.1186/s12906-025-04973-0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary"
+              >"A systematic review of Flotation-Restricted Environmental Stimulation Therapy (REST)"
+              &mdash; BMC Complementary Medicine and Therapies, 2025<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          </li>
+        </ol>
+      </section>
+    </article>
+
+    <section class="relative isolate mt-16 overflow-hidden rounded-squircle border border-border bg-surface" aria-labelledby="cta-heading">
+      <svg
+        class="ripple pointer-events-none absolute -top-40 -right-40 -z-10 size-[26rem] sm:top-1/2 sm:-right-24 sm:size-[32rem] sm:-translate-y-1/2"
+        viewBox="0 0 400 400"
+        aria-hidden="true"
+        focusable="false"
       >
-        Find your float
-      </a>
-    </div>
+        <circle class="ripple-ring" cx="200" cy="200" r="196" />
+        <circle class="ripple-ring" cx="200" cy="200" r="196" />
+        <circle class="ripple-ring" cx="200" cy="200" r="196" />
+        <circle class="ripple-ring" cx="200" cy="200" r="196" />
+        <circle class="ripple-drop" cx="200" cy="200" r="5" />
+      </svg>
+      <div class="px-6 py-12 sm:px-12 sm:py-16">
+        <h2 id="cta-heading" class="max-w-md font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Ready to try a float?</h2>
+        <p class="mt-3 max-w-md text-lede text-ink-muted">Search studios by city, state, or zip and compare them before you book.</p>
+        <a
+          href="../float/"
+          class="mt-8 inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-base font-semibold text-white shadow-card transition-colors hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          Find your float
+        </a>
+      </div>
+    </section>
   </main>
 
-  <footer class="mt-12 border-t border-border">
-    <div class="mx-auto max-w-3xl px-4 py-6 text-sm text-ink-muted">
-      <a href="../" class="text-primary hover:text-primary-dark">Back to directory</a>
+  <footer class="mt-20 border-t border-border bg-surface">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 flex flex-col gap-8 py-10 sm:flex-row sm:items-start sm:justify-between">
+      <div class="max-w-sm">
+        <a href="../" class="font-display text-lg font-semibold text-primary-dark focus-visible:outline-2 focus-visible:outline-primary">Float Tank Directory</a>
+        <p class="mt-2 text-sm text-ink-muted">
+          Float tank studios across the United States, with pricing, amenities, and cleaning
+          standards where studios publish them.
+        </p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap gap-x-6 gap-y-3 text-sm" role="list">
+          <li><a href="../" class="text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary">Home</a></li>
+          <li><a href="../float/" class="text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary">Find a Float</a></li>
+          <li><a href="../about/" class="text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary">What is floating?</a></li>
+          <li><a href="../about/#sources-heading" class="text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary">Research sources</a></li>
+        </ul>
+      </nav>
     </div>
   </footer>
 </body>

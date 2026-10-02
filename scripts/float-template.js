@@ -1,6 +1,7 @@
 "use strict";
 
 const { escapeHtml, toNumber } = require("./listing-template");
+const { siteHeader, siteFooter, CONTAINER } = require("./site-chrome");
 
 function escapeJsonForScriptTag(obj) {
   return JSON.stringify(obj).replace(/</g, "\\u003c");
@@ -52,63 +53,46 @@ function renderFloatPage(listings, { siteUrl }) {
   />
 </head>
 <body class="bg-canvas text-ink font-sans antialiased">
-  <header class="border-b border-border">
-    <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-4">
-      <a href="../" class="font-display text-base font-semibold text-primary sm:text-lg">Float Tank Directory</a>
-      <nav class="flex items-center gap-2 sm:gap-6" aria-label="Primary">
-        <a
-          href="../"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >Home</a
-        >
-        <a
-          href="../about/"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >About</a
-        >
-        <a
-          href="./"
-          class="text-sm font-medium text-ink-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          aria-current="page"
-          >Find a Float</a
-        >
-      </nav>
-    </div>
-  </header>
+  ${siteHeader({ base: "../", current: "float" })}
 
-  <main class="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-    <h1 class="font-display text-3xl font-semibold text-ink sm:text-4xl">Find a Float Near You</h1>
+  <main class="${CONTAINER} py-10 sm:py-14">
+    <h1 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-page">Find a float near you</h1>
 
-    <div class="mt-6">
+    <div class="mt-6 max-w-xl">
       <label for="search" class="sr-only">Search by city, state, or zip</label>
-      <input
-        type="search"
-        id="search"
-        placeholder="Search by city, state, or zip…"
-        class="w-full rounded-lg border border-border bg-surface px-4 py-3 text-ink placeholder:text-ink-muted focus-visible:outline-2 focus-visible:outline-primary"
-      />
+      <div class="relative">
+        <svg class="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+          <circle cx="8.5" cy="8.5" r="5.75" />
+          <path d="m13 13 4 4" stroke-linecap="round" />
+        </svg>
+        <input
+          type="search"
+          id="search"
+          placeholder="Search by city, state, or zip…"
+          class="w-full rounded-2xl border border-border bg-canvas py-4 pr-4 pl-12 text-base text-ink shadow-search transition-[border-color,box-shadow] placeholder:text-ink-muted hover:border-primary/40 focus-visible:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        />
+      </div>
+      <p id="results-count" class="mt-3 min-h-5 text-sm text-ink-muted" aria-live="polite"></p>
     </div>
 
-    <section class="mt-6" aria-labelledby="map-heading">
-      <h2 id="map-heading" class="sr-only">Map</h2>
-      <div id="map" class="h-80 w-full rounded-lg border border-border sm:h-96"></div>
-    </section>
+    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-8">
+      <section class="lg:col-start-2 lg:row-start-1" aria-labelledby="map-heading">
+        <h2 id="map-heading" class="sr-only">Map</h2>
+        <div id="map" class="isolate h-80 w-full overflow-hidden rounded-2xl border border-border sm:h-96 lg:sticky lg:top-24 lg:h-[calc(100dvh-8rem)] lg:max-h-[44rem]"></div>
+      </section>
 
-    <section class="mt-6" aria-labelledby="results-heading">
-      <h2 id="results-heading" class="sr-only">Results</h2>
-      <div id="results" role="list">
-        <p id="results-prompt" class="py-6 text-center text-ink-muted">
-          Search by city, state, or zip to see float studios near you.
-        </p>
-      </div>
-    </section>
+      <section class="lg:col-start-1 lg:row-start-1" aria-labelledby="results-heading">
+        <h2 id="results-heading" class="sr-only">Results</h2>
+        <div id="results">
+          <p id="results-prompt" class="rounded-2xl bg-surface px-5 py-8 text-center text-ink-muted">
+            Search by city, state, or zip to see float studios near you.
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer class="mt-12 border-t border-border">
-    <div class="mx-auto max-w-3xl px-4 py-6 text-sm text-ink-muted">
-      <a href="../" class="text-primary hover:text-primary-dark">Back to directory</a>
-    </div>
-  </footer>
+  ${siteFooter({ base: "../" })}
 
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -154,8 +138,35 @@ function renderFloatPage(listings, { siteUrl }) {
 
       var markersBySlug = {};
       var currentMarkers = [];
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function pinIcon() {
+        return L.divIcon({ className: "", html: '<span class="map-pin"></span>', iconSize: [20, 20], iconAnchor: [10, 10] });
+      }
+
+      // Display-only: show the 2-letter code whichever form the row stores.
+      function displayState(l) {
+        return l._stateAbbr.length === 2 ? l._stateAbbr.toUpperCase() : l.state;
+      }
+
+      // Card -> pin half of the two-way highlight.
+      var activeSlug = "";
+      function setActivePin(slug) {
+        var prev = markersBySlug[activeSlug];
+        if (prev && prev.getElement()) {
+          prev.getElement().firstChild.classList.remove("is-active");
+          prev.setZIndexOffset(0);
+        }
+        activeSlug = slug || "";
+        var next = markersBySlug[activeSlug];
+        if (next && next.getElement()) {
+          next.getElement().firstChild.classList.add("is-active");
+          next.setZIndexOffset(1000);
+        }
+      }
 
       function clearMarkers() {
+        activeSlug = "";
         currentMarkers.forEach(function (m) {
           map.removeLayer(m);
         });
@@ -163,48 +174,60 @@ function renderFloatPage(listings, { siteUrl }) {
         markersBySlug = {};
       }
 
+      // Pin -> card half of the two-way highlight.
       function clearHighlight() {
-        var prev = document.querySelector('[data-result-card].is-highlighted');
-        if (prev) prev.classList.remove("is-highlighted", "ring-2", "ring-primary", "bg-accent-tint");
+        var prev = document.querySelector("[data-result-card].is-highlighted");
+        if (prev) prev.classList.remove("is-highlighted", "border-primary", "bg-accent-tint");
       }
 
       function highlightResult(slug) {
         clearHighlight();
+        setActivePin(slug);
         var card = document.querySelector('[data-result-card="' + CSS.escape(slug) + '"]');
         if (card) {
-          card.classList.add("is-highlighted", "ring-2", "ring-primary", "bg-accent-tint");
-          card.scrollIntoView({ behavior: "smooth", block: "center" });
+          card.classList.add("is-highlighted", "border-primary", "bg-accent-tint");
+          card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
         }
       }
 
       function makeResultCard(listing) {
         var li = document.createElement("li");
-        li.setAttribute("data-result-card", listing.slug);
-        li.className =
-          "rounded-lg border border-border p-3 transition-colors";
 
+        // The whole card is the link (approved 2026-10-01).
         var a = document.createElement("a");
         a.href = "../listings/" + listing.slug + "/";
+        a.setAttribute("data-result-card", listing.slug);
         a.className =
-          "font-medium text-primary hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary";
-        a.textContent = listing.name;
+          "group block rounded-2xl border border-border bg-canvas p-4 transition-[translate,box-shadow,border-color,background-color] duration-200 hover:-translate-y-0.5 hover:border-primary hover:shadow-lift focus-visible:-translate-y-0.5 focus-visible:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0";
+
+        var name = document.createElement("span");
+        name.className = "block font-display font-semibold text-ink group-hover:text-primary-dark";
+        name.textContent = listing.name;
+        a.appendChild(name);
+
+        var place = document.createElement("span");
+        place.className = "mt-0.5 block text-sm text-ink-muted";
+        place.textContent = listing.city + ", " + displayState(listing) + (listing.zip ? " " + listing.zip : "");
+        a.appendChild(place);
+
+        a.addEventListener("mouseenter", function () { setActivePin(listing.slug); });
+        a.addEventListener("mouseleave", function () { setActivePin(""); });
+        a.addEventListener("focus", function () { setActivePin(listing.slug); });
+        a.addEventListener("blur", function () { setActivePin(""); });
+
         li.appendChild(a);
-
-        var span = document.createElement("span");
-        span.className = "block text-sm text-ink-muted";
-        span.textContent = listing.city + ", " + listing.state + " " + listing.zip;
-        li.appendChild(span);
-
         return li;
       }
 
       function renderResults(matches) {
         var container = document.getElementById("results");
         container.innerHTML = "";
+        document.getElementById("results-count").textContent =
+          matches.length + (matches.length === 1 ? " studio" : " studios");
 
         if (matches.length === 0) {
           var p = document.createElement("p");
-          p.className = "py-6 text-center text-ink-muted";
+          p.className = "rounded-2xl bg-surface px-5 py-8 text-center text-ink-muted";
           p.textContent = "No float studios match that search.";
           container.appendChild(p);
           return;
@@ -222,7 +245,7 @@ function renderFloatPage(listings, { siteUrl }) {
       function renderMarkers(matches) {
         clearMarkers();
         matches.forEach(function (l) {
-          var marker = L.marker([l.lat, l.lng]).addTo(map);
+          var marker = L.marker([l.lat, l.lng], { icon: pinIcon(), title: l.name, alt: l.name }).addTo(map);
           marker.on("click", function () {
             highlightResult(l.slug);
           });
@@ -247,6 +270,7 @@ function renderFloatPage(listings, { siteUrl }) {
         if (q.length < 2) {
           document.getElementById("results").innerHTML = "";
           document.getElementById("results").appendChild(promptEl);
+          document.getElementById("results-count").textContent = "";
           clearMarkers();
           map.setView([39.8, -98.6], 4);
           return;

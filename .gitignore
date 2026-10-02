@@ -37,6 +37,9 @@ yarn-error.log*
 pnpm-debug.log*
 *.log
 
+# playwright-cli session recordings (local visual-check scratch, not source)
+.playwright-cli/
+
 # OS junk
 .DS_Store
 Thumbs.db
