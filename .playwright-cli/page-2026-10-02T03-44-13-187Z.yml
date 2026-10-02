@@ -1,0 +1,75 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Float Tank Directory
+      - navigation "Primary" [ref=e5]:
+        - link "About" [ref=e6] [cursor=pointer]:
+          - /url: about/
+        - link "Find a Float" [ref=e7] [cursor=pointer]:
+          - /url: float/
+  - main [ref=e8]:
+    - region [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Find a float tank near you" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Search verified studios by city, state, or name — compare real pricing, amenities, and cleaning standards before you book.
+        - generic [ref=e13]:
+          - generic [ref=e14]: Search by business, city, or state
+          - searchbox "Search by business, city, or state" [ref=e16]
+          - paragraph [ref=e17]: 475 studios
+    - region [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Featured Studios" [level=2] [ref=e21]
+        - button "Pause auto-refresh" [ref=e22]
+      - list [ref=e23]:
+        - listitem [ref=e24]:
+          - link "Levity Wellness Center Tucson, AZ" [ref=e25] [cursor=pointer]:
+            - /url: listings/levity-wellness-center-tucson-az/
+            - generic [ref=e26]: Levity Wellness Center
+            - generic [ref=e27]: Tucson, AZ
+        - listitem [ref=e28]:
+          - link "Soak Float Center Salem, OR" [ref=e29] [cursor=pointer]:
+            - /url: listings/soak-float-center-salem-or/
+            - generic [ref=e30]: Soak Float Center
+            - generic [ref=e31]: Salem, OR
+        - listitem [ref=e32]:
+          - link "Rest Relax Boise, Idaho" [ref=e33] [cursor=pointer]:
+            - /url: listings/rest-relax-boise-idaho/
+            - generic [ref=e34]: Rest Relax
+            - generic [ref=e35]: Boise, Idaho
+        - listitem [ref=e36]:
+          - link "Massage For Your Health Hermann, Missouri" [ref=e37] [cursor=pointer]:
+            - /url: listings/massage-for-your-health-hermann-missouri/
+            - generic [ref=e38]: Massage For Your Health
+            - generic [ref=e39]: Hermann, Missouri
+        - listitem [ref=e40]:
+          - link "Float Harder Relaxation Center Portland, ME" [ref=e41] [cursor=pointer]:
+            - /url: listings/float-harder-relaxation-center-portland-me/
+            - generic [ref=e42]: Float Harder Relaxation Center
+            - generic [ref=e43]: Portland, ME
+        - listitem [ref=e44]:
+          - link "Light Side Floats Frederick, Maryland" [ref=e45] [cursor=pointer]:
+            - /url: listings/light-side-floats-frederick-maryland/
+            - generic [ref=e46]: Light Side Floats
+            - generic [ref=e47]: Frederick, Maryland
+        - listitem [ref=e48]:
+          - link "The Salt Barre Pittston, PA" [ref=e49] [cursor=pointer]:
+            - /url: listings/the-salt-barre-pittston-pa/
+            - generic [ref=e50]: The Salt Barre
+            - generic [ref=e51]: Pittston, PA
+        - listitem [ref=e52]:
+          - link "The Bodhi Tree Holistic Healing Lawrence, Kansas" [ref=e53] [cursor=pointer]:
+            - /url: listings/the-bodhi-tree-holistic-healing-lawrence-kansas/
+            - generic [ref=e54]: The Bodhi Tree Holistic Healing
+            - generic [ref=e55]: Lawrence, Kansas
+        - listitem [ref=e56]:
+          - 'link "relax: Float Spa Doylestown, Pennsylvania" [ref=e57] [cursor=pointer]':
+            - /url: listings/relax-float-spa-doylestown-pennsylvania/
+            - generic [ref=e58]: "relax: Float Spa"
+            - generic [ref=e59]: Doylestown, Pennsylvania
+        - listitem [ref=e60]:
+          - link "Isolate Float Center Boulder, CO" [ref=e61] [cursor=pointer]:
+            - /url: listings/isolate-float-center-boulder-co/
+            - generic [ref=e62]: Isolate Float Center
+            - generic [ref=e63]: Boulder, CO
+  - contentinfo [ref=e64]:
+    - generic [ref=e65]: Float Tank Directory

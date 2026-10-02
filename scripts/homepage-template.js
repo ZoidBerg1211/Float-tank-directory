@@ -93,26 +93,51 @@ function renderHomepage(listings, { siteUrl }) {
     </div>
   </header>
 
-  <main class="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-    <section class="text-center sm:text-left">
-      <h1 class="font-display text-3xl font-semibold text-ink sm:text-4xl">Find a Float Tank Near You</h1>
-      <p class="mt-3 text-ink-muted">
-        Search verified studios by city, state, or name — compare real pricing, amenities, and
-        cleaning standards before you book.
-      </p>
-      <div class="mt-6">
-        <label for="search" class="sr-only">Search by business, city, or state</label>
-        <input
-          type="search"
-          id="search"
-          placeholder="Search by business, city, or state…"
-          class="w-full rounded-lg border border-border bg-surface px-4 py-3 text-ink placeholder:text-ink-muted focus-visible:outline-2 focus-visible:outline-primary"
-        />
-        <p id="result-count" class="mt-2 text-sm text-ink-muted" aria-live="polite">${count} studios</p>
+  <main>
+    <section class="relative isolate overflow-hidden border-b border-border bg-surface" aria-labelledby="hero-heading">
+      <div class="relative mx-auto max-w-3xl px-4 pt-14 pb-12 sm:pt-24 sm:pb-20">
+        <!-- Decorative: a drop landing on still water. Rings are CSS-animated
+             (not SMIL) so the reduced-motion block in input.css can stop them. -->
+        <svg
+          class="ripple pointer-events-none absolute -top-24 -right-44 -z-10 size-[26rem] sm:top-1/2 sm:-right-56 sm:size-[40rem] sm:-translate-y-1/2"
+          viewBox="0 0 400 400"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle class="ripple-ring" cx="200" cy="200" r="196" />
+          <circle class="ripple-ring" cx="200" cy="200" r="196" />
+          <circle class="ripple-ring" cx="200" cy="200" r="196" />
+          <circle class="ripple-ring" cx="200" cy="200" r="196" />
+          <circle class="ripple-drop" cx="200" cy="200" r="5" />
+        </svg>
+        <h1 id="hero-heading" class="max-w-xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl">
+          Find a float tank near you
+        </h1>
+        <p class="mt-5 max-w-lg text-lg text-ink-muted">
+          Search verified studios by city, state, or name — compare real pricing, amenities, and
+          cleaning standards before you book.
+        </p>
+        <div class="mt-8 max-w-xl">
+          <label for="search" class="sr-only">Search by business, city, or state</label>
+          <div class="relative">
+            <svg class="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+              <circle cx="8.5" cy="8.5" r="5.75" />
+              <path d="m13 13 4 4" stroke-linecap="round" />
+            </svg>
+            <input
+              type="search"
+              id="search"
+              placeholder="Search by business, city, or state…"
+              class="w-full rounded-2xl border border-border bg-canvas py-4 pr-4 pl-12 text-base text-ink shadow-search transition-[border-color,box-shadow] placeholder:text-ink-muted hover:border-primary/40 focus-visible:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            />
+          </div>
+          <p id="result-count" class="mt-3 text-sm text-ink-muted" aria-live="polite">${count} studios</p>
+        </div>
       </div>
     </section>
 
-    <section class="mt-8" aria-labelledby="listings-heading">
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+    <section aria-labelledby="listings-heading">
       <div class="flex items-center justify-between gap-4">
         <h2 id="listings-heading" class="font-display text-lg font-semibold text-ink">Featured Studios</h2>
         <button
@@ -129,6 +154,7 @@ function renderHomepage(listings, { siteUrl }) {
       </ul>
       <p id="no-results" class="py-6 text-center text-ink-muted" hidden>No studios match your search.</p>
     </section>
+    </div>
   </main>
 
   <footer class="mt-12 border-t border-border">
