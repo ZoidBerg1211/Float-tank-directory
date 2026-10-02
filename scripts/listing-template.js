@@ -124,6 +124,16 @@ function icon(name, cls) {
 
 const EXTRAS_VISIBLE = 12;
 
+// A few studios publish a long menu of named treatments (e.g. a spa with 20-30
+// light-therapy/facial variants) where listing every one as its own chip adds
+// noise without adding information. For those, point to the business's own
+// page instead of enumerating the rest. Keyed by listings.id. Source for the
+// Recharge Milwaukee link: user-provided 2026-10-02, pointing at their public
+// booking page (https://www.rechargemilwaukee.com/book-a-single-session).
+const MORE_SERVICES_LINKS = {
+  "b84268a6-59d3-45b1-b56f-4991337e0f6e": "https://www.rechargemilwaukee.com/book-a-single-session",
+};
+
 function featureTilesHtml(tiles) {
   return tiles
     .map(
@@ -153,7 +163,7 @@ function sanitationHtml(items) {
     .join("\n          ");
 }
 
-function extrasHtml(items) {
+function extrasHtml(items, moreLink) {
   const chips = items
     .map(
       (a, i) =>
@@ -162,10 +172,20 @@ function extrasHtml(items) {
         }">${escapeHtml(a)}</li>`
     )
     .join("\n          ");
-  if (items.length <= EXTRAS_VISIBLE) return chips;
+  // Always visible regardless of collapse state — it's an escape hatch to see
+  // more, not one of the items being shown/hidden by the toggle.
+  const moreChip = moreLink
+    ? `\n          <li><a href="${escapeHtml(moreLink.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(
+        moreLink.ariaLabel
+      )}" class="inline-flex items-center gap-1 rounded-lg border border-dashed border-border px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-primary hover:bg-accent-tint hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">More +${icon(
+        "external",
+        "size-3"
+      )}<span class="sr-only"> (opens in a new tab)</span></a></li>`
+    : "";
+  if (items.length <= EXTRAS_VISIBLE) return chips + moreChip;
   // Toggle starts hidden: with no JS every chip shows and no dead button appears.
   return `${chips}
-          <li hidden><button type="button" id="extras-toggle" aria-expanded="true" aria-controls="extras-list" class="rounded-lg border border-dashed border-border px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-primary hover:bg-accent-tint hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Show fewer</button></li>`;
+          <li hidden><button type="button" id="extras-toggle" aria-expanded="true" aria-controls="extras-list" class="rounded-lg border border-dashed border-border px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-primary hover:bg-accent-tint hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Show fewer</button></li>${moreChip}`;
 }
 
 function buildMetaDescription(row, featurePills, shortestPrice, shortestMin) {
@@ -205,6 +225,11 @@ function renderListingPage(row, { siteUrl, canonicalPath }) {
   const featurePills = [...amenityPills, ...podPills, ...lightingPills, ...musicPills, ...showerPill];
 
   const sanitationPills = splitPills(row.sanitation_badges);
+
+  const moreServicesUrl = MORE_SERVICES_LINKS[row.id] || null;
+  const moreServicesLink = moreServicesUrl
+    ? { href: moreServicesUrl, ariaLabel: `See more services on ${row.business_name}'s site` }
+    : null;
 
   const shortestPrice = toNumber(row.shortest_session_price);
   const shortestMin = toNumber(row.shortest_session_min);
@@ -433,7 +458,7 @@ function renderListingPage(row, { siteUrl, canonicalPath }) {
             ? `<section aria-labelledby="extras-heading">
           <h2 id="extras-heading" class="font-display text-section font-semibold text-ink">Also offered <span class="ml-1 font-sans text-sm font-medium text-ink-muted">${amenityPills.length}</span></h2>
           <ul id="extras-list" class="group mt-4 flex flex-wrap gap-2" role="list">
-          ${extrasHtml(amenityPills)}
+          ${extrasHtml(amenityPills, moreServicesLink)}
           </ul>
         </section>`
             : ""
